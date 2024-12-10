@@ -1,0 +1,166 @@
+/*Floaty zen
+this theme makes parts of the zen UI float, such as the sidebar, the find bar, or the tabs bar
+it allows you to open and close elements without having to resize the page
+
+made by: @princess_wawa
+*/
+
+/* Floating Sidebar    -    based on https://github.com/ahmaadaziz/zen-floating-history */
+
+window.sidebar-panel {
+  background-color: var(--zen-themed-toolbar-bg) !important;
+}
+
+#sidebar-splitter{
+  margin-inline-end: 0 !important;
+  border: None !important;
+  --splitter-width: 0px !important;
+  visibility: hidden !important;
+  width: 0px !important;
+}
+
+search-textbox#search-box {
+  appearance: none !important;
+  background-color: var(--zen-colors-tertiary) !important;
+  border: 1px solid var(--zen-colors-border) !important;
+  padding: 0.5rem !important;
+  border-radius: 5px !important;
+}
+
+search-textbox#search-box:hover {
+  border: 1px solid var(--zen-colors-secondary) !important;
+}
+
+search-textbox#search-box:hover:active {
+  border: 1px solid var(--zen-colors-secondary) !important;
+}
+
+button#viewButton {
+  appearance: none;
+  color: inherit;
+  background-color: transparent !important;
+  border-radius: var(--toolbarbutton-border-radius);
+  border: 1px solid transparent !important;
+}
+
+button#viewButton:hover {
+  background-color: var(--zen-colors-border) !important;
+}
+
+button#viewButton:hover:active {
+  background-color: var(--zen-colors-border) !important;
+}
+
+#sidebar-box[positionend=""]{
+ right: 1vw !important;
+ left: unset !important;
+}
+#sidebar-box:not([positionend=""]){
+  right: unset !important;
+  left: 1vw !important;
+ }
+
+
+#sidebar-header {
+  border-bottom: 0px !important; 
+}
+
+#sidebar-box{
+  background-color: var(--zen-themed-toolbar-bg) !important;
+  border-radius: var(--zen-border-radius);
+  box-shadow: 0 0 2px 2px rgba(0,0,0,.1);
+  border: 1px solid var(--zen-colors-border);
+  padding: var(--zen-toolbox-padding) !important;
+  position: fixed;
+  z-index: 1;
+  height: auto !important;
+  width: 20em !important;
+  top: 10vh !important;
+  bottom: 10vh !important;
+  transform: translateX(105%);
+  transition: all 0.2s ease-in-out;
+}
+
+#sidebar-box[hidden=true]{
+  display: flex !important;
+  opacity: 0 !important;
+  transform: translateX(105%);
+  z-index: -25 !important;
+}
+
+#sidebar-box[checked=true]{
+  transform: translateX(0);
+}
+
+
+/* Floating Find bar     -     based on https://github.com/RobotoSkunk/zen-better-findbar */
+
+
+@-moz-document url-prefix("chrome:") {
+	:root {
+		--rs-findbar-open-pos: 15px;
+		--rs-findbar-closed-pos: -85px;
+		--rs-findbar-transition-duration: 0.35s;
+	}
+
+	@keyframes rs-findbar-open {
+		from {
+			top: var(--rs-findbar-closed-pos);
+		}
+
+		to {
+			top: var(--rs-findbar-open-pos);
+		}
+	}
+
+	findbar {
+		display: flex;
+
+		border-radius: var(--zen-border-radius) !important;
+		margin: 0px !important;
+
+		width: 90% !important;
+		max-width: 800px;
+
+		/* height: 50px !important; */
+		height: auto !important;
+
+		position: absolute !important;
+		top: var(--rs-findbar-open-pos);
+		left: 50%;
+		transform: translateX(-50%);
+
+		overflow: unset !important;
+		box-shadow: var(--box-shadow-10);
+
+		background: var(--zen-colors-tertiary) !important;
+		border: 1px solid var(--zen-colors-border) !important;
+
+		animation-name: rs-findbar-open !important;
+		animation-duration: var(--rs-findbar-transition-duration) !important;
+		animation-timing-function: ease !important;
+
+		transition: all var(--rs-findbar-transition-duration) ease !important;
+
+
+		& .findbar-container {
+			flex-wrap: wrap;
+			overflow-x: auto !important;
+			height: auto !important;
+
+			row-gap: 10px;
+
+			& > :first-child {
+				width: 100% !important;
+			}
+	
+			& .findbar-textbox {
+				flex-grow: 1;
+			}
+		}
+
+		&[hidden="true"] {
+			top: var(--rs-findbar-closed-pos);
+		}
+	}
+}
